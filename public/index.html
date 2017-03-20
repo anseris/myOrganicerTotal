@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html ng-app="MainApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ejemplo MEAN</title>
+	<!-- Cargamos bootstrap -->
+	<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="lib/angular-material/angular-material.css" />
+	<!-- Cargamos angular -->
+	<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script> -->
+
+
+</head>
+<body ng-controller="mainController">
+	<div class="container">
+        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+      <md-button class="md-raised">Button</md-button>
+      <md-button class="md-raised md-primary">Primary</md-button>
+      <md-button ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
+      <md-button class="md-raised md-warn">Warn</md-button>
+      <div class="label">Raised</div>
+    </section>
+		<div class="jumbotron text-center" ng-prueba>
+			<h1>Nº de Registros: <span class="label label-success">{{ personas.length }}</span></h1>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-1">
+				<table class="table table-striped">
+					<tr class="info">
+						<td>Nombre</td>
+						<td>Apellidos</td>
+						<td>Edad</td>
+					</tr>
+					<tr ng-repeat="persona in personas" ng-click="selectPerson(persona)">
+						<td>{{ persona.nombre }}</td>
+						<td>{{ persona.apellido }}</td>
+						<td>{{ persona.edad }}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-sm-4 col-sm-offset-1 text-center">
+				<form name="myForm">
+					<div class="form-group">
+						<input type="text" class="form-control input-lg text-center" placeholder="Nombre" ng-model="newPersona.nombre" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Apellido" ng-model="newPersona.apellido" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Edad" ng-model="newPersona.edad" required>
+					</div>
+
+					<!-- Acciones que podemos realizar en el formulario -->
+					<button type="submit" class="btn btn-success btn-lg" ng-click="registrarPersona()" ng-disabled="myForm.$invalid || selected">Registrar</button>
+					<button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.apellido || !newPersona.edad || !selected">Modificar</button>
+					<button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.apellido || !newPersona.edad || !selected">Borrar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+	<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script> -->
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/angular-aria/angular-aria.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.js"></script>
+    <script src="lib/angular-resource/angular-resource.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="lib/angular-sanitize/angular-sanitize.js"></script>
+    <script src="lib/angular-messages/angular-messages.js"></script>
+    <script src="lib/angular-material/angular-material.js"></script>
+	<!-- Cargamos el javascript de angular -->
+	<script src="core.js"></script>
+</body>
+</html>

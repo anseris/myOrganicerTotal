@@ -1,11 +1,22 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+// Inicialización
+var express  = require('express');
+var app      = express(); 					// Utilizamos express
+var mongoose = require('mongoose'); 				// mongoose para mongodb
+var port  	 = process.env.PORT || 8080; 			// Cogemos el puerto 8080
 
-var mongoose= require('./config/mongoose'),
-    express= require('./config/express');
+// Configuracion
+mongoose.connect('mongodb://localhost:27017/test'); 	// Hacemos la conexión a la base de datos de Mongo con nombre "MeanExample"
 
-var db = mongoose();
-var app = express();
-app.listen(3000);
-module.exports = app;
+app.configure(function() {
+	app.use(express.static(__dirname + '/public'));
+	app.use(express.logger('dev')); 			// activamos el log en modo 'dev'
+	app.use(express.bodyParser());
+	app.use(express.methodOverride());
+});
 
-console.log('servidor ejecutandose en http://localhost:3000/');
+// Cargamos los endpoints
+require('./app/routes.js')(app);
+
+// Cogemos el puerto para escuchar
+app.listen(port);
+console.log("APP por el puerto " + port);
